@@ -1,0 +1,48 @@
+
+function prehash(name)
+	local game = hash("show " .. name) -- prehashes all the collections
+	return game
+end
+function init(self)
+	msg.post(".", "acquire_input_focus") --sends a message to the script messanger telling it that inputs are being processed by the script
+	--shows main menu when the game is first loaded
+	msg.post("#mainmenu_proxy", "load")
+	self.current_collection = "#mainmenu_proxy"
+	-- array containing all of the proxies and the hashes that call the proxy
+	self.list1 = {
+		-- {name = "game_proxy",		link = game},
+		-- {name = "mainmenu_proxy", 	link = main},
+		-- {name = "options_proxy", 	link = options},
+		-- {name = "freeplay_proxy", 	link = free_play},
+		-- {name = "shop_proxy", 		link = shop}
+		{name = "game_proxy",		link = prehash("play")},
+		{name = "mainmenu_proxy", 	link = prehash("main")},
+		{name = "options_proxy", 	link = prehash("options")},
+		{name = "help_proxy", 	link = prehash('help')},
+		{name = "shop_proxy", 		link = prehash('shop')},
+		{name = 'exit_proxy',       link = prehash('exit')},
+		
+	}
+end
+
+function on_message(self, message_id, message, sender)
+	
+	-- loops through the array, checking each to see whether a message has been sent to load the proxy
+	for i, v in ipairs(self.list1) do
+		if message_id == v.link then
+			collection(self, v.name)
+		end
+	end
+	
+	--shows the collection once loaded into memory 
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender,"enable")
+	end
+end
+
+function collection(self, load_collection)
+	--unloads the previous collection and loads the current collection	
+	msg.post(self.current_collection,"unload")
+	msg.post("#".. load_collection, "load")
+	self.current_collection = "#" .. load_collection
+end
