@@ -1,6 +1,10 @@
 key_trigger {
-  input: KEY_0
-  action: "toggle"
+  input: KEY_ESC
+  action: "esc"
+}
+key_trigger {
+  input: KEY_ENTER
+  action: "enter"
 }
 mouse_trigger {
   input: MOUSE_BUTTON_LEFT
