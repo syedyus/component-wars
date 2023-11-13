@@ -1,7 +1,7 @@
 script: "/main/exit/exit.gui_script"
 fonts {
   name: "exit"
-  font: "/main/exit/exit.font"
+  font: "/main/mainmenu/easier-to-read-font.font"
 }
 background_color {
   x: 0.0

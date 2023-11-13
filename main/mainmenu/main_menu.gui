@@ -29,7 +29,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 500.0
+    x: 2100.0
     y: 300.0
     z: 0.0
     w: 1.0
@@ -42,7 +42,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "component wars"
+  text: "Component Wars"
   font: "mainmenu"
   id: "componentwars"
   xanchor: XANCHOR_NONE
@@ -95,7 +95,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 500.0
+    x: 1600.0
     y: 300.0
     z: 0.0
     w: 1.0
@@ -161,7 +161,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 500.0
+    x: 650.0
     y: 300.0
     z: 0.0
     w: 1.0
@@ -227,7 +227,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 500.0
+    x: 1100.0
     y: 300.0
     z: 0.0
     w: 1.0
@@ -293,7 +293,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 500.0
+    x: 650.0
     y: 300.0
     z: 0.0
     w: 1.0
@@ -359,7 +359,7 @@ nodes {
     w: 1.0
   }
   size {
-    x: 500.0
+    x: 650.0
     y: 300.0
     z: 0.0
     w: 1.0

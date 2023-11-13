@@ -12,27 +12,35 @@ function on_input(self, action_id, action)
 	function touching_node(name_of_node)
 		return gui.pick_node(gui.get_node(name_of_node), action.x, action.y)
 	end
-	function hover(name_of_node)
-		gui.set_color(gui.get_node(name_of_node), vmath.vector4(0.5,0.5,0.5,1))
+	function hover(name_of_node,colour_being_set,size_being_set)
+		gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
+		gui.animate(gui.get_node(name_of_node),gui.PROP_SCALE, size_being_set,gui.EASING_LINEAR,0.1)
+		
 	end
-	
+	function return_hover(name_of_node,colour_being_set,size_being_set)
+		gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
+		gui.animate(gui.get_node(name_of_node),gui.PROP_SCALE, size_being_set,gui.EASING_LINEAR,0.1)
+
+	end
 
 	if touching_node('yes')  then
 		if action.pressed then
 			os.exit()
 		else
-			hover('yes')
+			hover('yes',vmath.vector4(0.9,0.5,0.5,1),vmath.vector3(0.375,0.375,1))
 		end
 			
 	elseif touching_node('no')  then
 		if action.pressed then
-			msg.post('msg.post("main:/controller', "show main")
+			msg.post('main:/controller', "show main")
 		else
-			hover('no')
+			hover('no',vmath.vector4(0.5,0.9,0.5,1),vmath.vector3(0.375,0.375,1))
 		end
 	else
 		for i,v in ipairs(self.table) do
-			gui.set_color(gui.get_node(v.node), vmath.vector4(1,1,1,1))
+			hover(v.node,vmath.vector4(1,1,1,1),vmath.vector3(0.25,0.25,1))
+			-- gui.animate(gui.get_node(v.node),gui.PROP_SCALE , vmath.vector3(0.25,0.25,1), gui.EASING_LINEAR, 0.05)
+			-- gui.animate(gui.get_node(v.node),gui.PROP_COLOR,vmath.vector4(1,1,1,1),gui.EASING_INSINE, 0.1)
 		end
 			
 			
