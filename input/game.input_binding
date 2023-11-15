@@ -6,6 +6,26 @@ key_trigger {
   input: KEY_ENTER
   action: "enter"
 }
+key_trigger {
+  input: KEY_P
+  action: "p"
+}
+key_trigger {
+  input: KEY_Q
+  action: "q"
+}
+key_trigger {
+  input: KEY_O
+  action: "o"
+}
+key_trigger {
+  input: KEY_S
+  action: "s"
+}
+key_trigger {
+  input: KEY_H
+  action: "h"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_LEFT
   action: "touch"
