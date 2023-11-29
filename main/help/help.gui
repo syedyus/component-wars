@@ -210,8 +210,8 @@ nodes {
 }
 nodes {
   position {
-    x: 0.0
-    y: 0.0
+    x: 536.0
+    y: 322.0
     z: 0.0
     w: 1.0
   }
@@ -241,8 +241,8 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "<text>"
-  font: ""
+  text: "1"
+  font: "easier-to-read-font"
   id: "help1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -276,8 +276,8 @@ nodes {
 }
 nodes {
   position {
-    x: 0.0
-    y: 0.0
+    x: 604.0
+    y: 383.0
     z: 0.0
     w: 1.0
   }
@@ -307,8 +307,9 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "<text>"
-  font: ""
+  text: "2\n"
+  ""
+  font: "easier-to-read-font"
   id: "help2"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -342,8 +343,8 @@ nodes {
 }
 nodes {
   position {
-    x: 0.0
-    y: 0.0
+    x: 576.0
+    y: 342.0
     z: 0.0
     w: 1.0
   }
@@ -373,8 +374,8 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "<text>"
-  font: ""
+  text: "3"
+  font: "easier-to-read-font"
   id: "help3"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
