@@ -7,18 +7,7 @@ function help_screen(self)
 		end
 	end
 end
-function hover(name_of_node,colour_being_set,size_being_set)
-	-- applies menu animations to a node 
-	gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
-	gui.animate(gui.get_node(name_of_node),gui.PROP_SCALE, size_being_set,gui.EASING_LINEAR,0.1)
 
-end
--- allows me to use another animation for hovering and it returning to normal
-function return_hover(name_of_node,colour_being_set,size_being_set)
-	gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
-	gui.animate(gui.get_node(name_of_node),gui.PROP_SCALE, size_being_set,gui.EASING_LINEAR,0.1)
-
-end
 
 function init(self)
 	
@@ -26,6 +15,8 @@ function init(self)
 	self.table = {
 		{node = 'back', colour = vmath.vector4(0.9,0.5,0.5,1)},
 		{node = 'next', colour = vmath.vector4(0.5,0.9,0.5,1)},
+		{node = 'exit', colour = vmath.vector4(0.42069,0.69,69,1)},
+		
 		
 	}
 	self.help_screens = {
@@ -40,8 +31,9 @@ function init(self)
 		gui.set_enabled(gui.get_node(v.node), false)
 	end
 	
-	
+	self.timer = 0
 	help_screen(self)
+	self.count_time = false
 end
 
 function final(self)
@@ -49,7 +41,11 @@ function final(self)
 end
 
 function update(self, dt)
-	
+	if self.count_time then
+		
+		self.timer = self.timer + dt 
+		print(self.timer)
+	end
 end
 
 function on_message(self, message_id, message, sender)
@@ -58,30 +54,65 @@ end
 
 
 function on_input(self, action_id, action)
+	function hover(name_of_node,colour_being_set,size_being_set)
+		-- applies menu animations to a node 
+		gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
+		gui.animate(gui.get_node(name_of_node),gui.PROP_SCALE, size_being_set,gui.EASING_LINEAR,0.1)
+
+	end
+	-- allows me to use another animation for hovering and it returning to normal
+	function return_hover(name_of_node,colour_being_set,size_being_set)
+		gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
+		gui.animate(gui.get_node(name_of_node),gui.PROP_SCALE, size_being_set,gui.EASING_LINEAR,0.1)
+
+	end
+	
 	function touching_node(name_of_node)
 		return gui.pick_node(gui.get_node(name_of_node), action.x, action.y)
 	end
-	
 	for i,v in ipairs(self.table) do
-		
-		if touching_node(v.node) and action.pressed then
+		if touching_node(v.node) then
+			if v.node == 'back' then
+				if action.pressed and self.current_node_loaded > 1  then
+					self.current_node_loaded= self.current_node_loaded -1
+					help_screen(self)
+				else
+					if self.current_node_loaded > 1  then
+						
+						hover('back',v.colour,vmath.vector3(0.375,0.375,1))
+					end
+				end
+			elseif v.node == 'next' then
+				if self.current_node_loaded < #self.help_screens and action.pressed then
+					self.current_node_loaded = self.current_node_loaded +1
+					help_screen(self)
+				else
+					if self.current_node_loaded < #self.help_screens and self.timer < 3 then
+						hover('next',v.colour,vmath.vector3(0.375,0.375,1))
+					end
+				end
 			
-			print('yes')
-			if v.node == 'back' and self.current_node_loaded > 1 then
-				print('yes')
+			elseif v.node == 'exit' then
+				if action.pressed then
 				
-				self.current_node_loaded= self.current_node_loaded -1
-				help_screen(self)
-
-			elseif v.node == 'next'  and self.current_node_loaded < #self.help_screens   then
-				
-				self.current_node_loaded = self.current_node_loaded +1
-				help_screen(self)
+				msg.post('main:/controller', "show main")
+				else
+				hover('exit',v.colour,vmath.vector3(0.375,0.375,1))
+				end
 			end
-			print(self.current_node_loaded)
+		else
+			if gui.get_color(gui.get_node(v.node)) == v.colour then
+				self.count_time = true
+				gui.animate(gui.get_node(v.node),gui.PROP_SCALE , vmath.vector3(0.25,0.25,1), gui.EASING_LINEAR, 0.05)
+				gui.animate(gui.get_node(v.node),gui.PROP_COLOR,vmath.vector4(1,1,1,1),gui.EASING_INSINE, 0.1) 
+			end
+			self.count_time = false
 		end
+		self.timer = 0
 	end
-				
+	if action_id == hash('esc') then
+		msg.post('main:/controller', "show main")
+	end	
 end
 
 function on_reload(self)
