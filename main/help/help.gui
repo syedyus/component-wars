@@ -348,8 +348,8 @@ nodes {
 }
 nodes {
   position {
-    x: 576.0
-    y: 342.0
+    x: 135.0
+    y: 542.0
     z: 0.0
     w: 1.0
   }
@@ -379,7 +379,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "3"
+  text: "T"
   font: "easier-to-read-font"
   id: "help3"
   xanchor: XANCHOR_NONE

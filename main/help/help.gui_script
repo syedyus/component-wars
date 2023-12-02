@@ -1,7 +1,7 @@
 function help_screen(self)
 	for i,v in ipairs(self.help_screens) do
 		if v.screen == self.current_node_loaded then
-			gui.set_enabled(gui.get_node(v.node), true)
+			gui.is_enabled(gui.get_node(v.node), true)
 		else
 			gui.set_enabled(gui.get_node(v.node), false)
 		end
@@ -91,10 +91,8 @@ function on_input(self, action_id, action)
 						hover('next',v.colour,vmath.vector3(0.375,0.375,1))
 					end
 				end
-			
 			elseif v.node == 'exit' then
 				if action.pressed then
-				
 				msg.post('main:/controller', "show main")
 				else
 				hover('exit',v.colour,vmath.vector3(0.375,0.375,1))
