@@ -30,6 +30,7 @@ function on_input(self, action_id, action)
 	if touching_node('yes')  then
 		
 		if action.pressed then
+			sys.open_url("https://www.youtube.com/watch?v=dQw4w9WgXcQ", {target = "_blank"})
 			--exits from the game
 			os.exit()
 		else
@@ -60,8 +61,11 @@ function on_input(self, action_id, action)
 		if action_id == hash("esc") then
 			msg.post('main:/controller', "show main")
 		elseif action_id == hash('enter') then
+			sys.open_url("https://www.youtube.com/watch?v=dQw4w9WgXcQ", {target = "_blank"})
+
 			-- when enter is pressed then the game exits
 			os.exit()
+			
 		end
 			
 			

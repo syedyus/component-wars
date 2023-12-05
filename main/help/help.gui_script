@@ -1,7 +1,8 @@
 function help_screen(self)
+	gui.set_text(gui.get_node('Page'),'Page:' .. self.current_node_loaded .. '/' .. self.help_screen_size )
 	for i,v in ipairs(self.help_screens) do
 		if v.screen == self.current_node_loaded then
-			gui.is_enabled(gui.get_node(v.node), true)
+			gui.set_enabled(gui.get_node(v.node), true)
 		else
 			gui.set_enabled(gui.get_node(v.node), false)
 		end
@@ -22,18 +23,23 @@ function init(self)
 	self.help_screens = {
 		{node = 'help1',screen = 1},
 		{node = 'help2', screen = 2},
-		{node = 'help3', screen =3 },
+		{node = 'help3', screen =3},
 	}
-	
+	self.help_screen_size = 1
 	self.current_node_loaded =1
 	print(self.current_node_loaded)
 	for i,v in ipairs(self.help_screens) do 
+		
 		gui.set_enabled(gui.get_node(v.node), false)
+		print(self.help_screen_size)
+		if v.screen > self.help_screen_size then
+			self.help_screen_size = v.screen
+		end
 	end
-	
-	self.timer = 0
+	gui.set_text(gui.get_node('Page'),'Page:' .. self.current_node_loaded .. '/' .. self.help_screen_size )
 	help_screen(self)
-	self.count_time = false
+	
+	
 end
 
 function final(self)
@@ -41,11 +47,7 @@ function final(self)
 end
 
 function update(self, dt)
-	if self.count_time then
-		
-		self.timer = self.timer + dt 
-		print(self.timer)
-	end
+	
 end
 
 function on_message(self, message_id, message, sender)
@@ -74,21 +76,33 @@ function on_input(self, action_id, action)
 		if touching_node(v.node) then
 			if v.node == 'back' then
 				if action.pressed and self.current_node_loaded > 1  then
-					self.current_node_loaded= self.current_node_loaded -1
+					self.current_node_loaded = self.current_node_loaded -1
+					
+					
 					help_screen(self)
 				else
 					if self.current_node_loaded > 1  then
 						
 						hover('back',v.colour,vmath.vector3(0.375,0.375,1))
+
+					elseif self.current_node_loaded == 1 and gui.get_color(gui.get_node(v.node)) == v.colour then 
+						print('no')
+						hover('back',vmath.vector3(1,1,1),vmath.vector3(0.25,0.25,1))
 					end
 				end
 			elseif v.node == 'next' then
-				if self.current_node_loaded < #self.help_screens and action.pressed then
+				if self.current_node_loaded < self.help_screen_size and action.pressed then
 					self.current_node_loaded = self.current_node_loaded +1
+					
 					help_screen(self)
 				else
-					if self.current_node_loaded < #self.help_screens and self.timer < 3 then
+					if self.current_node_loaded < self.help_screen_size  then
+						
+						
 						hover('next',v.colour,vmath.vector3(0.375,0.375,1))
+					elseif self.current_node_loaded == self.help_screen_size and gui.get_color(gui.get_node(v.node)) == v.colour then
+						print('yes')
+						hover('next',vmath.vector3(1,1,1),vmath.vector3(0.25,0.25,1))
 					end
 				end
 			elseif v.node == 'exit' then
