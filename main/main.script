@@ -23,6 +23,7 @@ function init(self)
 		{name = 'exit_proxy',       link = prehash('exit')},
 		
 	}
+	
 end
 
 function on_message(self, message_id, message, sender)
