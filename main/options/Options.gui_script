@@ -9,14 +9,14 @@ local function save_volume(volume)
 	sys.save(filename, { volume = volume })  -- <4>
 end
 local function load_music_volume()
-	local filename = sys.get_save_file("sys_save_load", "music") -- <1>
-	local data = sys.load(filename) -- <2>
+	local file = sys.get_save_file("sys_save_load", "music") -- <1>
+	local data = sys.load(file) -- <2>
 	return data.music or 50   -- <3>
 end
 
 local function save_music_volume(volume)
-	local filename = sys.get_save_file("sys_save_load", "music")
-	sys.save(filename, { music = music })  -- <4>
+	local file = sys.get_save_file("sys_save_load", "music")
+	sys.save(file, { music = music })  -- <4>
 end
 
 
@@ -27,8 +27,9 @@ function init(self)
 		{node = 'music volume', volume = load_music_volume()},
 		{node = 'sound effect volume', volume = 50}
 	}
-	
-	
+	for i,v in ipairs(self.nodes) do
+		gui.set_text(gui.get_node(v.node),v.volume)
+	end	
 	
 end
 function hover(name_of_node,colour_being_set,size_being_set)
@@ -73,8 +74,9 @@ function on_input(self, action_id, action)
 	if action_id == hash('esc') then
 		msg.post("main:/controller", 'show main')
 	end
+	
 	for i,v in ipairs(self.nodes) do
-		gui.set_text(gui.get_node(v.node), v.volume)
+		
 
 		if v.volume > 0 and touching_node(v.node .. ' down')  then
 			if action.pressed then
@@ -84,8 +86,10 @@ function on_input(self, action_id, action)
 				if v.node == 'master volume' then
 					save_volume(v.volume)
 				elseif v.node == 'music volume' then
-					print('yes')
 					save_music_volume(v.volume)
+					print('yes')
+					print(v.volume)
+					
 					
 				end
 				

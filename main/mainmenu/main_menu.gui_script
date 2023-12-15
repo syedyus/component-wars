@@ -1,7 +1,7 @@
 
 function init(self)
 	msg.post(".","acquire_input_focus")
-	sound.play('/mainmenu#menusound', {gain  = 0})
+	sound.play('/mainmenu#menusound', {gain  = 4})
 	-- table containing all the nodes and the keyboard keys used in the main menu and also stores the colour each node will change to 
 	self.list1 = {
 		{node = 'play', key = 'p', colour = vmath.vector4(0.75,0.75,1,0.75) },
