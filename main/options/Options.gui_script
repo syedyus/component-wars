@@ -1,17 +1,17 @@
-local function load_volume()
+function load_volume()
 	local filename = sys.get_save_file("sys_save_load", "volume") -- <1>
 	local data = sys.load(filename) -- <2>
-	return data.volume or 50   -- <3>
+	return data.volume or 5   -- <3>
 end
 
-local function save_volume(volume)
+function save_volume(volume)
 	local filename = sys.get_save_file("sys_save_load", "volume")
 	sys.save(filename, { volume = volume })  -- <4>
 end
 local function load_music_volume()
 	local file = sys.get_save_file("sys_save_load", "music") -- <1>
 	local data = sys.load(file) -- <2>
-	return data.music or 50   -- <3>
+	return data.music or 5   -- <3>
 end
 
 local function save_music_volume(volume)
@@ -21,9 +21,10 @@ end
 
 
 function init(self)
+	
 	msg.post('.', 'acquire_input_focus')
 	self.nodes = {
-		{node = 'master volume',volume = load_volume()},
+		{node = 'master volume',volume = load_volume() * 10},
 		{node = 'music volume', volume = load_music_volume()},
 		{node = 'sound effect volume', volume = 50}
 	}
@@ -84,7 +85,8 @@ function on_input(self, action_id, action)
 				v.volume = v.volume -10
 				
 				if v.node == 'master volume' then
-					save_volume(v.volume)
+					
+					save_volume(v.volume/10)
 				elseif v.node == 'music volume' then
 					save_music_volume(v.volume)
 					print('yes')
@@ -104,7 +106,7 @@ function on_input(self, action_id, action)
 				
 				v.volume = v.volume + 10
 				if v.node == 'master volume' then
-					save_volume(v.volume)
+					save_volume(v.volume/10)
 				elseif v.node == 'music volume' then
 					save_music_volume(v.volume)
 					print(load_volume())

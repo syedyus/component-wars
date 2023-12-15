@@ -5,7 +5,7 @@ fonts {
 }
 textures {
   name: "game"
-  texture: "/main/game.atlas"
+  texture: "/main/game/game.atlas"
 }
 background_color {
   x: 0.0
@@ -149,8 +149,8 @@ nodes {
 }
 nodes {
   position {
-    x: 288.0
-    y: 218.0
+    x: -1676.0
+    y: -1734.0
     z: 0.0
     w: 1.0
   }
@@ -161,14 +161,14 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 0.125
-    y: 0.125
-    z: 1.0
+    x: 0.5
+    y: 0.5
+    z: 0.88
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 2200.0
+    y: 400.0
     z: 0.0
     w: 1.0
   }
@@ -200,6 +200,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
+  parent: "question 1"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -215,8 +216,8 @@ nodes {
 }
 nodes {
   position {
-    x: 635.0
-    y: 218.0
+    x: -5.0
+    y: -1734.0
     z: 0.0
     w: 1.0
   }
@@ -227,14 +228,14 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 0.125
-    y: 0.125
+    x: 0.5
+    y: 0.5
     z: 1.0
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 1500.0
+    y: 400.0
     z: 0.0
     w: 1.0
   }
@@ -266,6 +267,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
+  parent: "question 1"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -281,8 +283,8 @@ nodes {
 }
 nodes {
   position {
-    x: 980.0
-    y: 220.0
+    x: 1588.0
+    y: -1732.0
     z: 0.0
     w: 1.0
   }
@@ -293,14 +295,14 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 0.125
-    y: 0.125
+    x: 0.5
+    y: 0.5
     z: 1.0
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 2000.0
+    y: 400.0
     z: 0.0
     w: 1.0
   }
@@ -333,6 +335,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
+  parent: "question 1"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -380,7 +383,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "game/notebook-xps-13-9315-umber-gallery-3"
-  id: "box"
+  id: "picture1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -399,6 +402,271 @@ nodes {
   alpha: 1.0
   template_node_child: false
   size_mode: SIZE_MODE_AUTO
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: 111.0
+    y: 512.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.125
+    y: 0.125
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Score: 0"
+  font: "easier-to-read-font"
+  id: "score"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: 124.0
+    y: 447.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.125
+    y: 0.125
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Multiplier\n"
+  ""
+  font: "easier-to-read-font"
+  id: "multiplier"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: 215.0
+    y: 378.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.125
+    y: 0.125
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Answer:"
+  font: "easier-to-read-font"
+  id: "correct"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: 150.0
+    y: 333.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.125
+    y: 0.125
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Highscore:"
+  font: "easier-to-read-font"
+  id: "highscore"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  layer: ""
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.0
   custom_type: 0
   enabled: true
   visible: true
