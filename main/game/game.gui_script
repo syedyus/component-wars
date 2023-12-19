@@ -22,9 +22,7 @@ function init(self)
 	msg.post('.','acquire_input_focus')
 	gui.set_enabled(gui.get_node('crypto_options'), false)
 	self.turn = 1 
-	self.player_turn = 1
-	self.player1_cards = {}
-	self.player2_cards = {}
+	
 	self.crypto = {
 		{player = 1,bitcoin = 0 ,etherium = 0, solana = 0, light_coin =0,tether = 0},
 		{player = 2,bitcoin = 0 ,etherium = 0, solana = 0, light_coin =0,tether = 0},
