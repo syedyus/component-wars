@@ -9,7 +9,7 @@ function init(self)
 	msg.post(".","acquire_input_focus")
 	
 	self.volume = load_volume()
-	print(self.volume)
+	
 	sound.play('/mainmenu#menusound', {gain  = self.volume})
 	-- table containing all the nodes and the keyboard keys used in the main menu and also stores the colour each node will change to 
 	self.list1 = {
@@ -27,7 +27,7 @@ function final(self)
 	msg.post(".","release_input_focus")
 end
 function update(self, dt)
-	print(self.sound_effect_playing)
+	
 end
 function on_input(self, action_id, action)
 
