@@ -1,11 +1,11 @@
-script: "/main/mainmenu/main_menu.gui_script"
+script: "/main/game/game.gui_script"
 fonts {
-  name: "mainmenu"
+  name: "easier-to-read-font"
   font: "/main/mainmenu/easier-to-read-font.font"
 }
 textures {
-  name: "main_menu"
-  texture: "/main/mainmenu/main_menu.atlas"
+  name: "game"
+  texture: "/main/game/game.atlas"
 }
 background_color {
   x: 0.0
@@ -15,8 +15,8 @@ background_color {
 }
 nodes {
   position {
-    x: 624.0
-    y: 454.0
+    x: 94.0
+    y: 338.0
     z: 0.0
     w: 1.0
   }
@@ -27,14 +27,14 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 0.25
-    y: 0.25
+    x: 0.5
+    y: 0.5
     z: 1.0
     w: 1.0
   }
   size {
-    x: 1600.0
-    y: 300.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -44,36 +44,28 @@ nodes {
     z: 1.0
     w: 1.0
   }
-  type: TYPE_TEXT
+  type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  text: "play game"
-  font: "mainmenu"
-  id: "play"
+  texture: "game/images"
+  id: "box"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   layer: ""
   inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
   alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
+  size_mode: SIZE_MODE_AUTO
   custom_type: 0
   enabled: true
   visible: true
@@ -81,8 +73,8 @@ nodes {
 }
 nodes {
   position {
-    x: 624.0
-    y: 354.0
+    x: 1199.0
+    y: 73.0
     z: 0.0
     w: 1.0
   }
@@ -93,14 +85,14 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 0.25
-    y: 0.25
+    x: 0.125
+    y: 0.125
     z: 1.0
     w: 1.0
   }
   size {
-    x: 650.0
-    y: 300.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -110,36 +102,28 @@ nodes {
     z: 1.0
     w: 1.0
   }
-  type: TYPE_TEXT
+  type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  text: "help"
-  font: "mainmenu"
-  id: "help"
+  texture: "game/81vOF2Rr2tS._AC_UF894,1000_QL80_"
+  id: "crypto"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   layer: ""
   inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
   alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
+  size_mode: SIZE_MODE_AUTO
   custom_type: 0
   enabled: true
   visible: true
@@ -147,8 +131,8 @@ nodes {
 }
 nodes {
   position {
-    x: 624.0
-    y: 254.0
+    x: 602.0
+    y: 612.0
     z: 0.0
     w: 1.0
   }
@@ -165,8 +149,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 1100.0
-    y: 300.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -178,76 +162,10 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "options"
-  font: "mainmenu"
-  id: "options"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  adjust_mode: ADJUST_MODE_FIT
-  line_break: false
-  layer: ""
-  inherit_alpha: true
-  alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
-  template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
-  custom_type: 0
-  enabled: true
-  visible: true
-  material: ""
-}
-nodes {
-  position {
-    x: 624.0
-    y: 154.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 0.25
-    y: 0.25
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 650.0
-    y: 300.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  type: TYPE_TEXT
-  blend_mode: BLEND_MODE_ALPHA
-  text: "minigame\n"
+  text: "Player Turn\n"
   ""
-  font: "mainmenu"
-  id: "minigame"
+  font: "easier-to-read-font"
+  id: "turn"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -280,8 +198,8 @@ nodes {
 }
 nodes {
   position {
-    x: 617.0
-    y: 602.0
+    x: 639.0
+    y: 319.0
     z: 0.0
     w: 1.0
   }
@@ -311,8 +229,8 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "main_menu/loggggggggo"
-  id: "Component Wars"
+  texture: "game/screen"
+  id: "crypto_options"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -338,8 +256,8 @@ nodes {
 }
 nodes {
   position {
-    x: 624.0
-    y: 54.0
+    x: 8.0
+    y: 532.0
     z: 0.0
     w: 1.0
   }
@@ -350,14 +268,14 @@ nodes {
     w: 1.0
   }
   scale {
-    x: 0.25
-    y: 0.25
+    x: 0.5
+    y: 0.5
     z: 1.0
     w: 1.0
   }
   size {
-    x: 650.0
-    y: 300.0
+    x: 200.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -369,9 +287,10 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "exit"
-  font: "mainmenu"
-  id: "exit"
+  text: "0\n"
+  ""
+  font: "easier-to-read-font"
+  id: "text"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -389,6 +308,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
+  parent: "crypto_options"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -402,8 +322,123 @@ nodes {
   visible: true
   material: ""
 }
-layers {
-  name: "background"
+nodes {
+  position {
+    x: 500.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "game/right-arrow"
+  id: "box2"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "text"
+  layer: ""
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_AUTO
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
+}
+nodes {
+  position {
+    x: -500.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "game/left-arrow"
+  id: "box3"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "text"
+  layer: ""
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_AUTO
+  custom_type: 0
+  enabled: true
+  visible: true
+  material: ""
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

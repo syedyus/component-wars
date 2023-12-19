@@ -19,7 +19,7 @@ function init(self)
 		{name = "mainmenu_proxy", 	link = prehash("main")},
 		{name = "options_proxy", 	link = prehash("options")},
 		{name = "help_proxy", 	link = prehash('help')},
-		{name = "shop_proxy", 		link = prehash('shop')},
+		{name = "minigame_proxy", 		link = prehash('minigame')},
 		{name = 'exit_proxy',       link = prehash('exit')},
 		
 	}

@@ -1,5 +1,21 @@
 images {
-  image: "/graphics/notebook-xps-13-9315-umber-gallery-3.jpg"
+  image: "/graphics/images.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/graphics/81vOF2Rr2tS._AC_UF894,1000_QL80_.jpg"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/graphics/right-arrow.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/graphics/left-arrow.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/graphics/screen.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0

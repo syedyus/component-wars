@@ -1,10 +1,10 @@
-name: "game"
+name: "minigame"
 scale_along_z: 0
 embedded_instances {
-  id: "card_screen"
+  id: "go"
   data: "components {\n"
-  "  id: \"card_screen\"\n"
-  "  component: \"/main/game/card_screen.gui\"\n"
+  "  id: \"game\"\n"
+  "  component: \"/main/minigame/game.gui\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

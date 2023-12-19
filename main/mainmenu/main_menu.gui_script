@@ -16,7 +16,7 @@ function init(self)
 		{node = 'play', key = 'p', colour = vmath.vector4(0.75,0.75,1,0.75) },
 		{node = 'exit', key = 'q', colour = vmath.vector4(0.75,0.75,1,0.75)},
 		{node = 'options',key = 'o', colour = vmath.vector4(0.75,0.75,1,0.75)},
-		{node = 'shop', key= 's', colour = vmath.vector4(0.75,0.75,1,0.75)},
+		{node = 'minigame', key= 's', colour = vmath.vector4(0.75,0.75,1,0.75)},
 		{node = 'help', key = 'h', colour = vmath.vector4(0.75,0.75,1,0.75)},
 	}
 	self.hover = false

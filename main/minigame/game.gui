@@ -1,11 +1,11 @@
-script: "/main/game/game.gui_script"
+script: "/main/minigame/game.gui_script"
 fonts {
   name: "easier-to-read-font"
   font: "/main/mainmenu/easier-to-read-font.font"
 }
 textures {
   name: "game"
-  texture: "/main/game/game.atlas"
+  texture: "/main/minigame/minigame.atlas"
 }
 background_color {
   x: 0.0
