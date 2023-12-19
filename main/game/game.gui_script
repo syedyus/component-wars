@@ -68,7 +68,11 @@ function on_input(self, action_id, action)
 	end
 	for i,v in ipairs(self.crypto) do
 		if touching_node('crypto') and action.pressed and self.player_turn == v.player then
-			gui.set_enabled('crypto_options', true)
+			gui.set_enabled(gui.get_node('crypto_options'), true)
+		elseif touching_node('confirm') and action.pressed then
+			gui.set_enabled(gui.get_node('crypto_options'), false)
+			
+			
 		end
 	end
 			
