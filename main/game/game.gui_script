@@ -22,7 +22,7 @@ function init(self)
 	msg.post('.','acquire_input_focus')
 	gui.set_enabled(gui.get_node('crypto_options'), false)
 	self.turn = 1 
-	
+	self.phase = 1 -- self.phase can have two values 1 being the coin phase and 2 being the card phase
 	self.crypto = {
 		{player = 1,bitcoin = 0 ,etherium = 0, solana = 0, light_coin =0,tether = 0},
 		{player = 2,bitcoin = 0 ,etherium = 0, solana = 0, light_coin =0,tether = 0},
@@ -70,11 +70,19 @@ function on_input(self, action_id, action)
 		elseif touching_node('confirm') and action.pressed then
 			gui.set_enabled(gui.get_node('crypto_options'), false)
 			gui.set_text(gui.get_node('phase'),'Card Phase')
+			self.phase = 2
 			
 			
 		end
 	end
-			
+	if touching_node('end turn') and self.phase = 2 and action.pressed then
+		self.turn = self.turn +1
+		if self.start = 0 then
+			player2_start(self)
+		else
+			player1_start(self)
+		
+		 	
 		 
 			
 end
