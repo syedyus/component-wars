@@ -31,6 +31,7 @@ function init(self)
 		{player = 1,bitcoin = 0 ,etherium = 0, solana = 0, lightcoin =0,tether = 0},
 		{player = 2,bitcoin = 0 ,etherium = 0, solana = 0, light_coin =0,tether = 0},
 	}
+	self.crypto_selected = 0
 	self.nodes = {
 		{node= 'bitcoin'},
 		{node = 'etherium'},
@@ -80,7 +81,7 @@ function on_input(self, action_id, action)
 			
 		
 		if self.player_turn == v.player then
-			self.crypto_selected = 0
+			gui.set_text(gui.get_node('bitcoin'),v.bitcoin)
 			if touching_node('crypto') and action.pressed then
 				gui.set_enabled(gui.get_node('crypto_options'), true)
 			elseif touching_node('confirm') and action.pressed then
@@ -92,7 +93,7 @@ function on_input(self, action_id, action)
 			if self.crypto_selected <3 then
 				if  touching_node('bitcoin up') and action.pressed then
 					v.bitcoin = v.bitcoin +1
-					print(self.crypto_selected )
+					print(self.crypto_selected)
 					self.crypto_selected = self.crypto_selected + 1
 					gui.set_text(gui.get_node('bitcoin'),v.bitcoin)
 				end
@@ -103,7 +104,7 @@ function on_input(self, action_id, action)
 		
 	end
 	if touching_node('end turn') and self.phase == 2 and action.pressed then
-		
+		self.crypto_selected = 0
 		self.turn = self.turn +1
 		print(self.turn)
 		if self.start == 0 then
