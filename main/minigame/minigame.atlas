@@ -3,7 +3,7 @@ images {
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/graphics/b395bfdc79935252b271cfa35cb47df9.jpg"
+  image: "/graphics/b395bfdc79935252b271cfa35cb47df9.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0
