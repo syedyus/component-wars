@@ -40,9 +40,7 @@ function hover(name_of_node,colour_being_set,size_being_set)
 
 end
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	msg.post('.','release_input_focus')
 end
 
 function update(self, dt)

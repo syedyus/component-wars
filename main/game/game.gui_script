@@ -10,7 +10,14 @@ function player2_start(self)
 	gui.set_text(gui.get_node('phase'), 'Coin Phase')
 	gui.set_text(gui.get_node('turn'),'Player '.. self.player_turn .."'s turn")
 end
+function hover(name_of_node,colour_being_set,size_being_set)
+	-- applies menu animations to a node 
+	gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
+	gui.animate(gui.get_node(name_of_node),gui.PROP_SCALE, size_being_set,gui.EASING_LINEAR,0.1)
+
+end
 function player1_start(self)
+	
 	if math.fmod(self.turn,2) == 0 then
 		self.player_turn = 2
 	else
@@ -23,14 +30,18 @@ end
 	
 
 function init(self)
+	gui.set_color(gui.get_node('reminder'), vmath.vector4(1,1,1,0)) 
 	msg.post('.','acquire_input_focus')
+	gui.set_enabled(gui.get_node('reminder'), false)
 	gui.set_enabled(gui.get_node('crypto_options'), false)
 	self.turn = 1 
 	self.phase = 1 -- self.phase can have two values 1 being the coin phase and 2 being the card phase
 	self.crypto = {
-		{player = 1,bitcoin = 0 ,etherium = 0, solana = 0, lightcoin =0,tether = 0},
-		{player = 2,bitcoin = 0 ,etherium = 0, solana = 0, light_coin =0,tether = 0},
+		{  1,  0 ,0, 0, 0,0},
+		{2, 0 , 0, 0, 0,0},
 	}
+	self.nodes = {'bitcoin','etherium','solana','lightcoin','tether'}
+	
 	self.crypto_selected = 0
 	self.deck = {}
 	self.field = {}
@@ -47,9 +58,7 @@ function init(self)
 end
 
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	msg.post('.', 'release_input_focus')
 end
 
 function update(self, dt)
@@ -70,44 +79,70 @@ function on_input(self, action_id, action)
 	function touching_node(name_of_node)
 		return gui.pick_node(gui.get_node(name_of_node), action.x, action.y)
 	end
-	for i,v in ipairs(self.crypto) do
-		
-			
-		
-		if self.player_turn == v.player then
-			gui.set_text(gui.get_node('bitcoin'),v.bitcoin)
-			gui.set_text(gui.get_node('solana'),v.solana)
-			if touching_node('crypto') and action.pressed then
-				gui.set_enabled(gui.get_node('crypto_options'), true)
-			elseif touching_node('confirm') and action.pressed then
-				gui.set_enabled(gui.get_node('crypto_options'), false)
-				gui.set_text(gui.get_node('phase'),'Card Phase')
-				self.phase = 2
-					
-			end
-			if self.crypto_selected <3 then
-				
-				if  touching_node('bitcoin up') and action.pressed then
-					v.bitcoin = v.bitcoin +1
-					print(self.crypto_selected)
-					self.crypto_selected = self.crypto_selected + 1
-					gui.set_text(gui.get_node('bitcoin'),v.bitcoin)
-				elseif  touching_node('solana up') and action.pressed then
-					v.solana = v.solana +1
-					print(self.crypto_selected)
-					self.crypto_selected = self.crypto_selected + 1
-					gui.set_text(gui.get_node('solana'),v.solana)
+	if touching_node('crypto') and action.pressed and self.phase == 1 then
+		gui.set_enabled(gui.get_node('crypto_options'), true)
+	elseif touching_node('confirm') and action.pressed  then
+		if self.crypto_selected == 3 then
+			gui.set_enabled(gui.get_node('crypto_options'), false)
+			gui.set_enabled(gui.get_node('reminder'), false)
+			self.crypto_selected = 0
+			gui.set_text(gui.get_node('phase'),'Card Phase')
+			self.phase = 2
+		elseif self.crypto_selected <3 and gui.get_color(gui.get_node('reminder')) == vmath.vector4(1,1,1,0)   then
+			gui.set_enabled(gui.get_node('reminder'), true)
+			gui.set_color(gui.get_node('reminder'), vmath.vector4(1,1,1,1))
+			gui.animate(gui.get_node('reminder'), gui.PROP_COLOR, vmath.vector4(1,1,1,0), gui.EASING_INEXPO, 2.5)
+		end
+	end
+	for i,v in ipairs(self.crypto) do	 	
+		for j = 1, #self.nodes,1 do
+			if self.player_turn == v[1] then
+				gui.set_text(gui.get_node(self.nodes[j]),v[j+1])
+			end			
+			if self.player_turn == v[1] then
+				if touching_node(self.nodes[j].. ' up') and self.crypto_selected < 3 then	
+					if action.pressed then
+						self.crypto_selected = self.crypto_selected +1
+						v[j+1] = v[j+1] + 1
+						print(self.crypto_selected)	
+						gui.set_text(gui.get_node(self.nodes[j]),v[j+1])
+						else
+							print('yes')
+							hover(self.nodes[j] .. ' up',vmath.vector4(0.5,0.5,0.5,0.5), gui.get_scale(gui.get_node('bitcoin up')))
+						end
+				elseif touching_node(self.nodes[j].. ' down')  and self.crypto_selected > 0 then
+					if action.pressed then
+							
+						self.crypto_selected = self.crypto_selected -1 
+						v[j+1] = v[j+1] -1
+						print(self.crypto_selected)
+						gui.set_text(gui.get_node(self.nodes[j]),v[j+1])
+					else
+
+						print('yes')
+						hover(self.nodes[j] .. ' down',vmath.vector4(0.5,0.5,0.5,0.5), gui.get_scale(gui.get_node('bitcoin up')))
+
+						
+					end
 				end
 			end
 		end
-			
-			
-		
 	end
-	if touching_node('end turn') and self.phase == 2 and action.pressed then
-		self.crypto_selected = 0
+					
+	for i = 1,#self.nodes do
+
+		if gui.get_color(gui.get_node(self.nodes[i].. ' up')) == vmath.vector4(0.5,0.5,0.5,0.5)  then
+			hover(self.nodes[i] .. ' up',vmath.vector4(1,1,1,1), gui.get_scale(gui.get_node('bitcoin up')))
+
+		elseif gui.get_color(gui.get_node(self.nodes[i].. ' down')) == vmath.vector4(0.5,0.5,0.5,0.5)  then
+			hover(self.nodes[i] .. ' down',vmath.vector4(1,1,1,1), gui.get_scale(gui.get_node('bitcoin up')))
+		end
+	end
+	if touching_node('end turn') and self.phase == 2 and action.pressed  then
+		
+		
 		self.turn = self.turn +1
-		print(self.turn)
+		
 		if self.start == 0 then
 			
 			player1_start(self)

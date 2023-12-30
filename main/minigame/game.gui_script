@@ -24,13 +24,14 @@ function init(self)
 	msg.post('.','acquire_input_focus')
 	print('yes')
 	self.screens = {
-		{node = 'question 1', screen = 1,answer = 2,difficulty = 3},
-		{node = 'answer1' , screen = 1, answer = 0,difficulty=3},
-		{node = 'answer2' , screen = 1, answer = 1,difficulty = 3},
-		{node = 'answer3' , screen = 1, answer = 0,difficulty = 3},
-		{node = 'picture1', screen = 1, answer = 2,difficulty = 3},
+		{node = 'question 1', screen = 1,answer = 2},
+		{node = 'answer1' , screen = 1, answer = 0},
+		{node = 'answer2' , screen = 1, answer = 1},
+		{node = 'answer3' , screen = 1, answer = 0},
+		{node = 'picture1', screen = 1, answer = 2},
 		
 	}
+	
 	self.current_screen_loaded = 1
 	game_screen(self)
 	self.score = 0

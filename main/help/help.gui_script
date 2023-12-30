@@ -1,3 +1,10 @@
+function load_volume()
+	local filename = sys.get_save_file("sys_save_load", "volume") -- <1>
+	local data = sys.load(filename) -- <2>
+	return data.volume or 5   -- <3>
+end
+
+
 function help_screen(self)
 	gui.set_text(gui.get_node('Page'),'Page:' .. self.current_node_loaded .. '/' .. self.help_screen_size )
 	for i,v in ipairs(self.help_screens) do
@@ -11,12 +18,16 @@ end
 
 
 function init(self)
-	sound.play('/help#bgm')
 	msg.post('.','acquire_input_focus')
+	self.volume = load_volume()
+	sound.play('/help#bgm', {gain = self.volume})
+	
 	
 	self.table = {
 		
 		{node = 'exit', colour = vmath.vector4(0.42069,0.69,69,1)},	
+		{node = 'back', colour = vmath.vector4(0.42069,0.69,69,1)},	
+		{node = 'next', colour = vmath.vector4(0.42069,0.69,69,1)},	
 		
 	}
 	self.help_screens = {
@@ -24,11 +35,10 @@ function init(self)
 		{node = 'help2', screen = 2},
 		{node = 'help3', screen =3},
 	}
-	self.help_screen_size = 1
+	self.help_screen_size = 0
 	self.current_node_loaded =1
 	print(self.current_node_loaded)
 	for i,v in ipairs(self.help_screens) do 
-		
 		gui.set_enabled(gui.get_node(v.node), false)
 		print(self.help_screen_size)
 		if v.screen > self.help_screen_size then
@@ -42,7 +52,7 @@ function init(self)
 end
 
 function final(self)
-	
+	msg.post('.','release_input_focus')
 end
 
 function update(self, dt)

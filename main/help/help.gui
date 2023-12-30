@@ -282,8 +282,8 @@ nodes {
 }
 nodes {
   position {
-    x: 604.0
-    y: 383.0
+    x: 632.0
+    y: 413.0
     z: 0.0
     w: 1.0
   }
@@ -313,7 +313,15 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "2\n"
+  text: "There are 4 different screens in the game. The first screen is \n"
+  "the game screen, which you can access from play game. You\n"
+  "can also access it by pressing P on the keyboard. You can also\n"
+  "access the options screen by pressing the options button on\n"
+  "the main menu or by pressing O. You can access the minigame\n"
+  "by pressing the S button or pressing the minigame button on\n"
+  "the main menu. Finally you can access the help menu by pressing\n"
+  "h or pressing the help button on the main menu. \n"
+  "\n"
   ""
   font: "easier-to-read-font"
   id: "help2"

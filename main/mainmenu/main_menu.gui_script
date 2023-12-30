@@ -1,7 +1,7 @@
 function load_volume()
 	local filename = sys.get_save_file("sys_save_load", "volume") -- <1>
 	local data = sys.load(filename) -- <2>
-	return data.volume or 50   -- <3>
+	return data.volume or 5   -- <3>
 end
 
 
