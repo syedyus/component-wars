@@ -1,9 +1,9 @@
 images {
-  image: "/graphics/notebook-xps-13-9315-umber-gallery-3.jpg"
+  image: "/graphics/b395bfdc79935252b271cfa35cb47df9.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
-  image: "/graphics/b395bfdc79935252b271cfa35cb47df9.png"
+  image: "/graphics/dellxps13.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 margin: 0

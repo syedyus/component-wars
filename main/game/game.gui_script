@@ -7,11 +7,13 @@ function player2_start(self)
 		
 	end
 	self.phase = 1
+	gui.set_text(gui.get_node('buildpower'),'Player ' .. self.player_turn .. ' Build Power:' .. self.crypto[self.player_turn][7])
 	gui.set_text(gui.get_node('phase'), 'Coin Phase')
 	gui.set_text(gui.get_node('turn'),'Player '.. self.player_turn .."'s turn")
 end
 function hover(name_of_node,colour_being_set)
-	-- applies menu animations to a node 
+	-- applies menu animations to a node
+	
 	gui.animate(gui.get_node(name_of_node),gui.PROP_COLOR, colour_being_set,gui.EASING_LINEAR,0.05)
 	
 
@@ -24,23 +26,38 @@ function player1_start(self)
 		self.player_turn = 1
 	end
 	self.phase = 1
+	gui.set_text(gui.get_node('buildpower'),'Player ' .. self.player_turn .. ' Build Power:' .. self.crypto[self.player_turn][7])
 	gui.set_text(gui.get_node('phase'), 'Coin Phase')
 	gui.set_text(gui.get_node('turn'),'Player '.. self.player_turn.. "'s turn")
 end
 	
 
 function init(self)
+	self.persistent_nodes = {'turn','crypto','end turn','buildpower','phase'}
 	gui.set_color(gui.get_node('reminder_crypto'), vmath.vector4(1,1,1,0)) 
-	gui.set_color(gui.get_node('reminder_turn'), vmath.vector4(1,1,1,0)) 
+	gui.set_color(gui.get_node('reminder_turn'), vmath.vector4(1,1,1,0))
+	gui.set_color(gui.get_node('reminder_select'), vmath.vector4(1,1,1,0)) 
+	gui.set_color(gui.get_node('reminder_pick'), vmath.vector4(1,1,1,0)) 
 	msg.post('.','acquire_input_focus')
 	gui.set_enabled(gui.get_node('reminder_crypto'), false)
 	gui.set_enabled(gui.get_node('crypto_options'), false)
 	self.turn = 1 
 	self.phase = 1 -- self.phase can have two values 1 being the coin phase and 2 being the card phase
 	self.crypto = {
-		{  1,  0 ,0, 0, 0,0},
-		{2, 0 , 0, 0, 0,0},
+		{1,10,0, 0, 0,0,0}, --first is the player number, second is bitcoin, third is etherium, fourth is solana, fifth is light coin, 6th is tether and eighth is the number of build power you have
+		{2,10,0, 0, 0,0,0},
 	}
+	self.temp = {
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+	}
+	self.cards = {
+		{'4090',5,10,0,0,0,0},
+	}
+		
+		
+	
+	
 	self.nodes = {'bitcoin','etherium','solana','lightcoin','tether'}
 	
 	self.crypto_selected = 0
@@ -55,34 +72,31 @@ function init(self)
 	else
 		player2_start(self)
 	end
-		
+	
 end
+
+		
 
 function final(self)
 	msg.post('.', 'release_input_focus')
 end
-
-function update(self, dt)
-	
-end
-
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
-end
-
 function on_input(self, action_id, action)
-	if action_id == hash('esc') then
-		msg.post('main:/controller', "show main")
-	end	
+	-- if action_id == hash('esc') then
+	-- 	msg.post('main:/controller', "show main")
+	-- end	
+	function return_hover(node)
+		if gui.get_color(gui.get_node(node)) == vmath.vector4(1,1,1,0.5) and not gui.pick_node(gui.get_node(node), action.x, action.y) then
+			gui.animate(gui.get_node(node),gui.PROP_COLOR, vmath.vector4(1,1,1,1),gui.EASING_LINEAR,0.05)
+		end
+	end
 	
 	function touching_node(name_of_node)
 		return gui.pick_node(gui.get_node(name_of_node), action.x, action.y)
 	end
-	if self.phase == 1  then 
-		if touching_node('crypto')  then
-			if action.pressed then
+	
+	if touching_node('crypto') then
+		if action.pressed then
+			if self.phase == 1 then
 				
 				if gui.is_enabled(gui.get_node('crypto_options')) == false then
 					gui.set_enabled(gui.get_node('crypto_options'), true)
@@ -92,62 +106,134 @@ function on_input(self, action_id, action)
 					gui.set_enabled(gui.get_node('crypto_options'), false)
 					gui.set_enabled(gui.get_node('reminder_turn'), true)
 				end
-					
-			else
-				hover('crypto',vmath.vector4(1,1,1,0.5))
+			elseif self.phase == 2 and  gui.get_color(gui.get_node('reminder_select')) == vmath.vector4(1,1,1,0) then
+				gui.set_enabled(gui.get_node('reminder_select'),true)
+				gui.set_color(gui.get_node('reminder_select'), vmath.vector4(1,1,1,1))
+				gui.animate(gui.get_node('reminder_select'), gui.PROP_COLOR, vmath.vector4(1,1,1,0), gui.EASING_LINEAR, 2.5)
 			end
-		elseif touching_node('confirm') and action.pressed  then
-			if self.crypto_selected == 3 then
-				gui.set_enabled(gui.get_node('crypto_options'), false)
-				gui.set_enabled(gui.get_node('reminder_crypto'), false)
-				self.crypto_selected = 0
-				gui.set_text(gui.get_node('phase'),'Card Phase')
-				self.phase = 2
-
-			
-			elseif self.crypto_selected <3 and gui.get_color(gui.get_node('reminder_crypto')) == vmath.vector4(1,1,1,0)   then
-				gui.set_enabled(gui.get_node('reminder_crypto'), true)
-				gui.set_color(gui.get_node('reminder_crypto'), vmath.vector4(1,1,1,1))
-				gui.animate(gui.get_node('reminder_crypto'), gui.PROP_COLOR, vmath.vector4(1,1,1,0), gui.EASING_LINEAR, 2.5)
-			
-			end
-		elseif touching_node('end turn') and gui.get_color(gui.get_node('reminder_turn')) == vmath.vector4(1,1,1,0) and action.pressed  then
-			gui.set_enabled(gui.get_node('reminder_turn'), true)
-			gui.set_color(gui.get_node('reminder_turn'), vmath.vector4(1,1,1,1))
-			gui.animate(gui.get_node('reminder_turn'), gui.PROP_COLOR, vmath.vector4(1,1,1,0), gui.EASING_LINEAR, 2.5)
+		else
+			hover('crypto',vmath.vector4(1,1,1,0.5))
 		end
+		
+		
+	
+		
+	elseif touching_node('confirm') and action.pressed and self.phase == 1 then
+		if self.crypto_selected == 3 then
+			gui.set_enabled(gui.get_node('crypto_options'), false)
+			gui.set_enabled(gui.get_node('reminder_crypto'), false)
+			gui.set_enabled(gui.get_node('reminder_pick'), false)
+			self.crypto_selected = 0
+			gui.set_text(gui.get_node('phase'),'Card Phase')
+			self.phase = 2
+			for i,v in ipairs(self.crypto) do	 	
+				for j = 1, #self.nodes,1 do
+					if self.player_turn == v[1] then
+						self.temp[v[1]][j] = v[j+1]
+						pprint(self.temp)
+					end
+				end
+			end
+			
+			
+		elseif self.crypto_selected <3 and gui.get_color(gui.get_node('reminder_crypto')) == vmath.vector4(1,1,1,0) then
+
+			gui.set_enabled(gui.get_node('reminder_crypto'), true)
+			gui.set_color(gui.get_node('reminder_crypto'), vmath.vector4(1,1,1,1))
+			gui.animate(gui.get_node('reminder_crypto'), gui.PROP_COLOR, vmath.vector4(1,1,1,0), gui.EASING_LINEAR, 2.5)
+		end
+	
+			
+	elseif touching_node('end turn')  then
+		if action.pressed then
+				
+				
+			if gui.get_color(gui.get_node('reminder_turn')) == vmath.vector4(1,1,1,0)  and self.phase == 1 then
+				gui.set_enabled(gui.get_node('reminder_turn'), true)
+				gui.set_color(gui.get_node('reminder_turn'), vmath.vector4(1,1,1,1))
+				gui.animate(gui.get_node('reminder_turn'), gui.PROP_COLOR, vmath.vector4(1,1,1,0), gui.EASING_LINEAR, 2.5)
+			
+			elseif self.phase == 2 then
+				gui.set_enabled(gui.get_node('reminder_select'),false)
+
+
+				self.turn = self.turn +1
+
+				if self.start == 0 then
+
+					player1_start(self)
+				else
+
+					player2_start(self)
+				end
+			end
+			
+		else
+			hover('end turn',vmath.vector4(1,1,1,0.8))
+			
+				
+					
+			
+				
+				
+		end
+	end
 		if gui.get_color(gui.get_node('crypto')) ==	vmath.vector4(1,1,1,0.5) and not touching_node('crypto')  then
 			hover('crypto',vmath.vector4(1,1,1,1))
 		end
-			
-	end
+		if gui.get_color(gui.get_node('end turn')) ==	vmath.vector4(1,1,1,0.8) and not touching_node('end turn')  then
+			hover('end turn',vmath.vector4(1,1,1,1))
+		end
+	
+		
+
+	
+	
 	for i,v in ipairs(self.crypto) do	 	
 		for j = 1, #self.nodes,1 do
+		-- 	if self.player_turn == v[1] then
+		-- 		
+		-- 		-- self.temp[v[1]][j] = v[j+1]
+		-- 		-- print(self.temp[v[1]][j])
+		-- 	end
+		-- 
+					
 			if self.player_turn == v[1] then
 				gui.set_text(gui.get_node(self.nodes[j]),v[j+1])
-			end			
-			if self.player_turn == v[1] then
-				if touching_node(self.nodes[j].. ' up') and self.crypto_selected < 3 then	
-					if action.pressed then
-						self.crypto_selected = self.crypto_selected +1
-						v[j+1] = v[j+1] + 1
-						print(self.crypto_selected)	
-						gui.set_text(gui.get_node(self.nodes[j]),v[j+1])
+				if touching_node(self.nodes[j].. ' up')  then	
+					
+					if self.crypto_selected < 3 then
+						if action.pressed then
+							self.crypto_selected = self.crypto_selected +1
+							v[j+1] = v[j+1] + 1
+							gui.set_text(gui.get_node(self.nodes[j]),v[j+1])
+							
 						else
-							print('yes')
 							hover(self.nodes[j] .. ' up',vmath.vector4(0.5,0.5,0.5,0.5))
 						end
-				elseif touching_node(self.nodes[j].. ' down')  and self.crypto_selected > 0  and v[j+1] ~= 0 then
+							
+					elseif self.crypto_selected == 3 and action.pressed and   gui.get_color(gui.get_node('reminder_pick')) == vmath.vector4(1,1,1,0) then
+						gui.set_enabled(gui.get_node('reminder_pick'), true)
+						gui.set_color(gui.get_node('reminder_pick'), vmath.vector4(1,1,1,1))
+						gui.animate(gui.get_node('reminder_pick'), gui.PROP_COLOR, vmath.vector4(1,1,1,0), gui.EASING_LINEAR, 2.5)
+						
+							
+						
+						
+					
+						
+						
+					end
+						
+						
+					elseif touching_node(self.nodes[j].. ' down')  and self.crypto_selected > 0  and self.temp[v[1]][j] < v[j+1] then
 					if action.pressed then
 							
 						self.crypto_selected = self.crypto_selected -1 
 						v[j+1] = v[j+1] -1
-						print(self.crypto_selected)
 						gui.set_text(gui.get_node(self.nodes[j]),v[j+1])
 					else
-
-						print('yes')
-						hover(self.nodes[j] .. ' down',vmath.vector4(0.5,0.5,0.5,0.5))
+							hover(self.nodes[j] .. ' down',vmath.vector4(0.5,0.5,0.5,0.5))
 
 						
 					end
@@ -155,7 +241,7 @@ function on_input(self, action_id, action)
 			end
 		end
 	end
-					
+				
 	for i = 1,#self.nodes do
 
 		if gui.get_color(gui.get_node(self.nodes[i].. ' up')) == vmath.vector4(0.5,0.5,0.5,0.5)  then
@@ -165,27 +251,68 @@ function on_input(self, action_id, action)
 			hover(self.nodes[i] .. ' down',vmath.vector4(1,1,1,1))
 		end
 	end
-	if touching_node('end turn') and self.phase == 2 and action.pressed  then
-		
-		
-		self.turn = self.turn +1
-		
-		if self.start == 0 then
-			
-			player1_start(self)
-		else
-		
-			player2_start(self)
+	if touching_node('escapebutton') and action.pressed or action_id == hash('esc') and action.pressed then
+		gui.set_enabled(gui.get_node('crypto_options'), false)
+		if gui.is_enabled(gui.get_node('exit')) == false then
+			gui.set_enabled(gui.get_node('exit'),true)
+			for i = 1,#self.persistent_nodes do
+				gui.set_enabled(gui.get_node(self.persistent_nodes[i]),false)
+			end
+		elseif gui.is_enabled(gui.get_node('exit')) == true  then
+			gui.set_enabled(gui.get_node('exit'),false)
+			for i = 1,#self.persistent_nodes do
+				gui.set_enabled(gui.get_node(self.persistent_nodes[i]),true)
+			end
 		end
 	end
-		
-		 	
-		 
+	if  touching_node('exitno') then
+		if action.pressed then
+			gui.set_enabled(gui.get_node('exit'),false)
+			for i = 1,#self.persistent_nodes do
+				gui.set_enabled(gui.get_node(self.persistent_nodes[i]),true)
+			end
+		else
+			hover('exitno', vmath.vector4(1,1,1,0.5))
 			
-end
+		end
+	elseif touching_node('exityes') then
+		if action.pressed then
+			msg.post('main:/controller', "show main")
+		else
+		
+			hover('exityes', vmath.vector4(1,1,1,0.5))
+			
+		end
+		
+			
 
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
+	end
+	return_hover('exityes')
+	return_hover('exitno')
+
+
+
+	if self.phase == 2 then
+		gui.set_enabled(gui.get_node('pack1'), true)
+		for i,v in ipairs(self.cards) do
+			for j,k in ipairs(self.crypto) do
+				if self.player_turn == k[1] then
+				
+					if gui.pick_node(gui.get_node(v[1]), action.x, action.y) and v[j+2] <= k[j+1] and action.pressed then
+					
+						k[i+1] = k[i+1] - v[i+2]
+						self.temp[k[1]][i] = k[i+1]
+						gui.set_enabled(gui.get_node(v[1]), false)
+						k[7] = k[7] +v[2]
+						gui.set_text(gui.get_node('buildpower'),'Player ' .. self.player_turn .. ' Build Power:' .. self.crypto[self.player_turn][7])
+					end
+				end
+			end
+		end
+	end
+				
+				
+		
+
+-- 	
 end
